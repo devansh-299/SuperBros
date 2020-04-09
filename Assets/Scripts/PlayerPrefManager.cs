@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement; // include so we can manipulate SceneManager
+// include so we can manipulate SceneManager
+using UnityEngine.SceneManagement;
 
 public static class PlayerPrefManager {
 
@@ -13,7 +14,7 @@ public static class PlayerPrefManager {
 	}
 
 	public static void SetLives(int lives) {
-		PlayerPrefs.SetInt("Lives",lives);
+		PlayerPrefs.SetInt("Lives", lives);
 	}
 
 	public static int GetScore() {
@@ -25,7 +26,7 @@ public static class PlayerPrefManager {
 	}
 
 	public static void SetScore(int score) {
-		PlayerPrefs.SetInt("Score",score);
+		PlayerPrefs.SetInt("Score", score);
 	}
 
 	public static int GetHighscore() {
@@ -37,22 +38,23 @@ public static class PlayerPrefManager {
 	}
 
 	public static void SetHighscore(int highscore) {
-		PlayerPrefs.SetInt("Highscore",highscore);
+		PlayerPrefs.SetInt("Highscore", highscore);
 	}
 
 
-	// story the current player state info into PlayerPrefs
+	// store the current player state info into PlayerPrefs
 	public static void SavePlayerState(int score, int highScore, int lives) {
 		// save currentscore and lives to PlayerPrefs for moving to next level
-		PlayerPrefs.SetInt("Score",score);
-		PlayerPrefs.SetInt("Lives",lives);
-		PlayerPrefs.SetInt("Highscore",highScore);
+		PlayerPrefs.SetInt("Score", score);
+		PlayerPrefs.SetInt("Lives", lives);
+		PlayerPrefs.SetInt("Highscore", highScore);
 	}
 	
 	// reset stored player state and variables back to defaults
+	// here startlives is the default lives given in the start. Specified in GameManager
 	public static void ResetPlayerState(int startLives, bool resetHighscore) {
 		Debug.Log ("Player State reset.");
-		PlayerPrefs.SetInt("Lives",startLives);
+		PlayerPrefs.SetInt("Lives", startLives);
 		PlayerPrefs.SetInt("Score", 0);
 
 		if (resetHighscore)
@@ -63,7 +65,7 @@ public static class PlayerPrefManager {
 	public static void UnlockLevel() {
 		// get current scene
 		Scene scene = SceneManager.GetActiveScene();
-		PlayerPrefs.SetInt(scene.name,1);
+		PlayerPrefs.SetInt(scene.name, 1);
 	}
 
 	// determine if a levelname is currently unlocked (i.e., it has a key set)
@@ -74,14 +76,14 @@ public static class PlayerPrefManager {
 	// output the defined Player Prefs to the console
 	public static void ShowPlayerPrefs() {
 		// store the PlayerPref keys to output to the console
-		string[] values = {"Score","Highscore","Lives"};
+		string[] values = {"Score", "Highscore", "Lives"};
 
 		// loop over the values and output to the console
 		foreach(string value in values) {
 			if (PlayerPrefs.HasKey(value)) {
-				Debug.Log (value+" = "+PlayerPrefs.GetInt(value));
+				Debug.Log (value + " = " + PlayerPrefs.GetInt(value));
 			} else {
-				Debug.Log (value+" is not set.");
+				Debug.Log (value + " is not set.");
 			}
 		}
 	}

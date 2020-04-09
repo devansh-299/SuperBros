@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI; // include UI namespace so can reference UI elements
-using UnityEngine.SceneManagement; // include so we can manipulate SceneManager
+// include UI namespace to reference UI elements
+using UnityEngine.UI;
+// include so we can manipulate SceneManager
+using UnityEngine.SceneManagement; 
 
 public class GameManager : MonoBehaviour {
 
-	// static reference to game manager so can be called from other scripts directly (not just through gameobject component)
+	// static reference to game manager, can be called from other scripts directly 
+	// and not just through gameobject component
 	public static GameManager gm;
 
 	// levels to move to on victory and lose
 	public string levelAfterVictory;
 	public string levelAfterGameOver;
 
-	// game performance
+	// default values
 	public int score = 0;
 	public int highscore = 0;
 	public int startLives = 3;
 	public int lives = 3;
 
-	// UI elements to control
+	// UI elements
 	public Text UIScore;
 	public Text UIHighScore;
 	public Text UILevel;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject UIGamePaused;
 
 	// private variables
+	// here underscore is used to refer private variables
 	GameObject _player;
 	Vector3 _spawnLocation;
 	Scene _scene;
@@ -57,41 +61,46 @@ public class GameManager : MonoBehaviour {
 	// setup all the variables, the UI, and provide errors if things not setup properly.
 	void setupDefaults() {
 		// setup reference to player
-		if (_player == null)
+		if (_player == null) {
 			_player = GameObject.FindGameObjectWithTag("Player");
+		}
 		
-		if (_player==null)
+		if (_player==null) {
 			Debug.LogError("Player not found in Game Manager");
+		}
 
 		// get current scene
 		_scene = SceneManager.GetActiveScene();
 
-		// get initial _spawnLocation based on initial position of player
+		// get initial _spawnLocation based on initial position of player as set in scene
 		_spawnLocation = _player.transform.position;
 
 		// if levels not specified, default to current level
-		if (levelAfterVictory=="") {
+		if (levelAfterVictory == "") {
 			Debug.LogWarning("levelAfterVictory not specified, defaulted to current level");
 			levelAfterVictory = _scene.name;
 		}
 		
-		if (levelAfterGameOver=="") {
+		if (levelAfterGameOver == "") {
 			Debug.LogWarning("levelAfterGameOver not specified, defaulted to current level");
 			levelAfterGameOver = _scene.name;
 		}
 
-		// friendly error messages
-		if (UIScore==null)
+		if (UIScore==null) {
 			Debug.LogError ("Need to set UIScore on Game Manager.");
+		}
 		
-		if (UIHighScore==null)
+		if (UIHighScore==null) {
 			Debug.LogError ("Need to set UIHighScore on Game Manager.");
+		}
 		
-		if (UILevel==null)
+		if (UILevel==null) {
 			Debug.LogError ("Need to set UILevel on Game Manager.");
+		}
 		
-		if (UIGamePaused==null)
+		if (UIGamePaused==null) {
 			Debug.LogError ("Need to set UIGamePaused on Game Manager.");
+		}
 		
 		// get stored player prefs
 		refreshPlayerState();
@@ -102,11 +111,11 @@ public class GameManager : MonoBehaviour {
 
 	// get stored Player Prefs if they exist, otherwise go with defaults set on gameObject
 	void refreshPlayerState() {
-		lives = PlayerPrefManager.GetLives();
 
+		lives = PlayerPrefManager.GetLives();
 		// special case if lives <= 0 then must be testing in editor, so reset the player prefs
 		if (lives <= 0) {
-			PlayerPrefManager.ResetPlayerState(startLives,false);
+			PlayerPrefManager.ResetPlayerState(startLives, false);
 			lives = PlayerPrefManager.GetLives();
 		}
 		score = PlayerPrefManager.GetScore();
@@ -119,13 +128,14 @@ public class GameManager : MonoBehaviour {
 	// refresh all the GUI elements
 	void refreshGUI() {
 		// set the text elements of the UI
-		UIScore.text = "Score: "+score.ToString();
-		UIHighScore.text = "Highscore: "+highscore.ToString ();
+		UIScore.text = "Score: " + score.ToString();
+		UIHighScore.text = "Highscore: " + highscore.ToString ();
 		UILevel.text = _scene.name;
 		
 		// turn on the appropriate number of life indicators in the UI based on the number of lives left
-		for(int i=0;i<UIExtraLives.Length;i++) {
-			if (i<(lives-1)) { // show one less than the number of lives since you only typically show lifes after the current life in UI
+		for(int i = 0; i < UIExtraLives.Length; i++) {
+			if (i < (lives-1)) { 
+				// show one less than the number of lives since its used when current live is used up
 				UIExtraLives[i].SetActive(true);
 			} else {
 				UIExtraLives[i].SetActive(false);
@@ -134,18 +144,17 @@ public class GameManager : MonoBehaviour {
 	}
 
 	// public function to add points and update the gui and highscore player prefs accordingly
-	public void AddPoints(int amount)
-	{
+	public void AddPoints(int amount) {
 		// increase score
 		score+=amount;
 
 		// update UI
-		UIScore.text = "Score: "+score.ToString();
-
+		UIScore.text = "Score: " + score.ToString();
+ 
 		// if score>highscore then update the highscore UI too
-		if (score>highscore) {
+		if (score > highscore) {
 			highscore = score;
-			UIHighScore.text = "Highscore: "+score.ToString();
+			UIHighScore.text = "Highscore: " + score.ToString();
 		}
 	}
 
@@ -155,13 +164,14 @@ public class GameManager : MonoBehaviour {
 		lives--;
 		refreshGUI();
 
-		if (lives<=0) { // no more lives
+		if (lives <= 0) { // no more lives
 			// save the current player prefs before going to GameOver
 			PlayerPrefManager.SavePlayerState(score,highscore,lives);
 
 			// load the gameOver screen
 			SceneManager.LoadScene(levelAfterGameOver);
-		} else { // tell the player to respawn
+		} else { 
+			// tell the player to respawn
 			_player.GetComponent<CharacterController2D>().Respawn(_spawnLocation);
 		}
 	}

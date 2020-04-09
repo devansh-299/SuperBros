@@ -202,6 +202,18 @@ public class CharacterController2D : MonoBehaviour {
 		PlaySound(jumpSFX);
 	}
 
+	// used when player jumps over enemy's head
+	// nearly same as DoJump
+	public void EnemyJump() {
+
+		// reset current vertical motion to 0 prior to jump
+		_vy = 0f;
+		// add a force in the up direction
+		_rigidbody.AddForce (new Vector2 (0, jumpForce/2));
+		// play the jump sound
+		PlaySound(jumpSFX);
+	}
+
 	// do what needs to be done to freeze the player
  	void FreezeMotion() {
 		playerCanMove = false;

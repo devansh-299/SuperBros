@@ -17,12 +17,12 @@ public class Victory : MonoBehaviour {
 			// mark as taken so doesn't get taken multiple times
 			taken=true;
 
-			// if explosion prefab is provide, then instantiate it
+			// if explosion prefab provided
 			if (explosion) {
 				Instantiate(explosion,transform.position,transform.rotation);
 			}
 
-			// do the player victory thing
+			// call the Victory method from character controller script
 			other.gameObject.GetComponent<CharacterController2D>().Victory();
 
 			// destroy the victory gameobject

@@ -43,22 +43,22 @@ TextureImporter:
     second: Sparty_SS_5
   - first:
       213: 21300026
-    second: Sparty_idle
+    second: Sparty_Idle1
   - first:
       213: 21300028
-    second: Sparty_idle_2
+    second: Sparty_Idle2
   - first:
       213: 21300030
-    second: Sparty_walk_1
+    second: Sparty_Walk1
   - first:
       213: 21300032
-    second: Sparty_walk_2
+    second: Sparty_Walk2
   - first:
       213: 21300034
-    second: Sparty_walk_3
+    second: Sparty_Walk3
   - first:
       213: 21300036
-    second: Sparty_jump
+    second: Sparty_Jump
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,7 +121,7 @@ TextureImporter:
     maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -132,7 +132,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 128
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -140,35 +140,11 @@ TextureImporter:
     overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 128
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 128
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sparty_idle
+      name: Sparty_Idle1
       rect:
         serializedVersion: 2
         x: 0
@@ -189,7 +165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sparty_idle_2
+      name: Sparty_Idle2
       rect:
         serializedVersion: 2
         x: 16
@@ -210,7 +186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sparty_walk_1
+      name: Sparty_Walk1
       rect:
         serializedVersion: 2
         x: 32
@@ -231,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sparty_walk_2
+      name: Sparty_Walk2
       rect:
         serializedVersion: 2
         x: 48
@@ -252,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sparty_walk_3
+      name: Sparty_Walk3
       rect:
         serializedVersion: 2
         x: 64
@@ -273,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sparty_jump
+      name: Sparty_Jump
       rect:
         serializedVersion: 2
         x: 80
@@ -296,7 +272,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f302775074f27ab4398706f252406e63
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 

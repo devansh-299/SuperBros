@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement; // include so we can load new scenes
+// included to load new scenes
+using UnityEngine.SceneManagement;
+// for adding mobile-touch support
+using UnityStandardAssets.CrossPlatformInput;
 
 public class CharacterController2D : MonoBehaviour {
 
@@ -96,7 +99,7 @@ public class CharacterController2D : MonoBehaviour {
 			return;
 
 		// determine horizontal velocity change based on the horizontal input
-		_vx = Input.GetAxisRaw ("Horizontal");
+		_vx = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
 
 		// Determine if running based on the horizontal movement
 		if (_vx != 0) {
@@ -107,7 +110,7 @@ public class CharacterController2D : MonoBehaviour {
 
 		// set the running animation state
 		// "Running" is the parameter set in the Animator
-		_animator.SetBool("Running", isRunning);
+		_animator.SetBool("Walking", isRunning);
 
 		// get the current vertical velocity from the rigidbody component
 		_vy = _rigidbody.velocity.y;
@@ -126,9 +129,9 @@ public class CharacterController2D : MonoBehaviour {
 		_animator.SetBool("Grounded", isGrounded);
 
 		// here "Jump" is the set of button(s) defined in InputManager
-		if(isGrounded && Input.GetButtonDown("Jump")) {
+		if(isGrounded && CrossPlatformInputManager.GetButtonDown("Jump")) {
 			DoJump();
-		} else if (_canDoubleJump && Input.GetButtonDown("Jump")) {
+		} else if (_canDoubleJump && CrossPlatformInputManager.GetButtonDown("Jump")) {
 			DoJump();
 			// disable double jump till grounded again
 			_canDoubleJump = false;
@@ -136,7 +139,7 @@ public class CharacterController2D : MonoBehaviour {
 	
 		// If the player stops jumping mid jump and player is not yet falling
 		// then set the vertical velocity to 0 (he will start to fall from gravity)
-		if(Input.GetButtonUp("Jump") && _vy>0f) {
+		if(CrossPlatformInputManager.GetButtonUp("Jump") && _vy>0f) {
 			_vy = 0f;
 		}
 

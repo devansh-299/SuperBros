@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI; // include UI namespace since references UI Buttons directly
-using UnityEngine.EventSystems; // include EventSystems namespace so can set initial input for controller support
-using UnityEngine.SceneManagement; // include so we can load new scenes
+// include UI namespace to reference UI Buttons directly
+using UnityEngine.UI;
+// include EventSystems namespace to set initial input for controller support 
+using UnityEngine.EventSystems; 
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
-	public int startLives=3; // how many lives to start the game with on New Game
+	// lives to start the game with on New Game
+	public int startLives=3; 
 
 	// references to Submenus
 	public GameObject _MainMenu;
@@ -17,6 +20,7 @@ public class MainMenuManager : MonoBehaviour {
 	public GameObject MenuDefaultButton;
 	public GameObject AboutDefaultButton;
 	public GameObject LevelSelectDefaultButton;
+	// note: this button is displayed depending on running platform
 	public GameObject QuitButton;
 
 	// list the level names
@@ -35,8 +39,7 @@ public class MainMenuManager : MonoBehaviour {
 	private string _mainTitle;
 
 	// init the menu
-	void Awake()
-	{
+	void Awake() {
 		// store the initial title so we can set it back
 		_mainTitle = titleText.text;
 
@@ -62,13 +65,14 @@ public class MainMenuManager : MonoBehaviour {
 			string levelname = LevelNames[i];
 
 			// dynamically create a button from the template
-			GameObject levelButton = Instantiate(LevelButtonPrefab,Vector3.zero,Quaternion.identity) as GameObject;
+			GameObject levelButton = Instantiate(
+				LevelButtonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
 			// name the game object
-			levelButton.name = levelname+" Button";
+			levelButton.name = levelname +" Button";
 
 			// set the parent of the button as the LevelsPanel so it will be dynamically arrange based on the defined layout
-			levelButton.transform.SetParent(LevelsPanel.transform,false);
+			levelButton.transform.SetParent(LevelsPanel.transform, false);
 
 			// get the Button script attached to the button
 			Button levelButtonScript = levelButton.GetComponent<Button>();
@@ -91,8 +95,8 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	// determine if the QUIT button should be present based on what platform the game is running on
-	void displayQuitWhenAppropriate() 
-	{
+	void displayQuitWhenAppropriate() {
+
 		switch (Application.platform) {
 			// platforms that should have quit button
 			case RuntimePlatform.WindowsPlayer:
@@ -121,8 +125,7 @@ public class MainMenuManager : MonoBehaviour {
 	// Public functions below that are available via the UI Event Triggers, such as on Buttons.
 
 	// Show the proper menu
-	public void ShowMenu(string name)
-	{
+	public void ShowMenu(string name) {
 		// turn all menus off
 		_MainMenu.SetActive (false);
 		_AboutMenu.SetActive(false);
@@ -130,27 +133,26 @@ public class MainMenuManager : MonoBehaviour {
 
 		// turn on desired menu and set default selected button for controller input
 		switch(name) {
-		case "MainMenu":
-			_MainMenu.SetActive (true);
-			EventSystem.current.SetSelectedGameObject (MenuDefaultButton);
-			titleText.text = _mainTitle;
-			break;
-		case "LevelSelect":
-			_LevelsMenu.SetActive(true);
-			EventSystem.current.SetSelectedGameObject (LevelSelectDefaultButton);
-			titleText.text = "Level Select";
-			break;
-		case "About":
-			_AboutMenu.SetActive(true);
-			EventSystem.current.SetSelectedGameObject (AboutDefaultButton);
-			titleText.text = "About";
-			break;
+			case "MainMenu":
+				_MainMenu.SetActive (true);
+				EventSystem.current.SetSelectedGameObject (MenuDefaultButton);
+				titleText.text = _mainTitle;
+				break;
+			case "LevelSelect":
+				_LevelsMenu.SetActive(true);
+				EventSystem.current.SetSelectedGameObject (LevelSelectDefaultButton);
+				titleText.text = "Level Select";
+				break;
+			case "About":
+				_AboutMenu.SetActive(true);
+				EventSystem.current.SetSelectedGameObject (AboutDefaultButton);
+				titleText.text = "About";
+				break;
 		}
 	}
 
 	// load the specified Unity level
-	public void loadLevel(string levelToLoad)
-	{
+	public void loadLevel(string levelToLoad) {
 		// start new game so initialize player state
 		PlayerPrefManager.ResetPlayerState(startLives,false);
 
@@ -159,8 +161,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	// quit the game
-	public void QuitGame()
-	{
+	public void QuitGame() {
 		Application.Quit ();
 	}
 }

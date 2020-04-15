@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelToLoad: MainMenu
-  delay: 2
+  delay: 4
 --- !u!4 &1381800167
 Transform:
   m_ObjectHideFlags: 0

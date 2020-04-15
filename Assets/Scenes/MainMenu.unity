@@ -1209,10 +1209,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Controls:
 
-    Keyboard = WASD or arrow keys to navigate and SPACE to
-    jump
+    Movement - Virtual JoyStick
 
-    XBox360 Controller = Left-analog to navigate and A button to jump
+    Jump - Tap on bottom right
+    corner
 
 '
 --- !u!222 &810693805
@@ -2402,6 +2402,7 @@ MonoBehaviour:
   LevelNames:
   - Level 1
   - Level 2
+  - Level 3
   LevelsPanel: {fileID: 1965858418}
   LevelButtonPrefab: {fileID: 119286, guid: a21484d929f934e8581ce67b72fa9d20, type: 3}
   titleText: {fileID: 1137038749}

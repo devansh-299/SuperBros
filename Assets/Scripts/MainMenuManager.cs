@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 // include UI namespace to reference UI Buttons directly
 using UnityEngine.UI;

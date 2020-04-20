@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.021230578, y: 0.21944451}
+  m_Offset: {x: -0.016635656, y: 0.21944451}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4904654, y: 0.07974911}
+  m_Size: {x: 0.8304858, y: 0.07974911}
   m_EdgeRadius: 0
 --- !u!50 &3656481405567113083
 Rigidbody2D:
@@ -382,3 +382,4 @@ MonoBehaviour:
   loopWaypoints: 1
   stunnedSFX: {fileID: 8300000, guid: 0d3166d91fc752247bc8239d9e32e109, type: 3}
   attackSFX: {fileID: 8300000, guid: 5584d4d0ce1fe7d448fe734f49aa90eb, type: 3}
+  _myWaypointIndex: 0

@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour {
 	public string levelAfterVictory;
 	public string levelAfterGameOver;
 
+	// Buttons
+	public Sprite[] sprites;	// 0 - Pause, 1 - Resume
+	public Button pauseButton;
+
 	// default values
 	public int score = 0;
 	public int highscore = 0;
@@ -48,13 +52,7 @@ public class GameManager : MonoBehaviour {
 	void Update() {
 		// if ESC pressed then pause the game
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-			if (Time.timeScale > 0f) {
-				UIGamePaused.SetActive(true); // this brings up the pause UI
-				Time.timeScale = 0f; // this pauses the game action
-			} else {
-				Time.timeScale = 1f; // this unpauses the game action (ie. back to normal)
-				UIGamePaused.SetActive(false); // remove the pause UI
-			}
+			TogglePause();
 		}
 	}
 
@@ -85,6 +83,9 @@ public class GameManager : MonoBehaviour {
 			Debug.LogWarning("levelAfterGameOver not specified, defaulted to current level");
 			levelAfterGameOver = _scene.name;
 		}
+
+		Button btn= pauseButton.GetComponent<Button>();
+		btn.onClick.AddListener(TogglePause);
 
 		if (UIScore==null) {
 			Debug.LogError ("Need to set UIScore on Game Manager.");
@@ -142,6 +143,20 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+
+	// for pausing the game
+	public void TogglePause() {
+
+        if (Time.timeScale > 0f) {
+			UIGamePaused.SetActive(true); // this brings up the pause UI
+			pauseButton.GetComponent<Image>().sprite = sprites[1];
+			Time.timeScale = 0f; // this pauses the game action
+		} else {
+			Time.timeScale = 1f; // this unpauses the game action (ie. back to normal)
+			pauseButton.GetComponent<Image>().sprite = sprites[0];
+			UIGamePaused.SetActive(false); // remove the pause UI
+		}   
+    }
 
 	// public function to add points and update the gui and highscore player prefs accordingly
 	public void AddPoints(int amount) {
